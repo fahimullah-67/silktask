@@ -11,13 +11,37 @@ connectDB()
 
 const app = express()
 app.use(express.json())
-app.use(cors(
-  {
-    origin: process.env.VITE_API_BASE_URL,
-    credentials: true
-  }
-)
-)
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || process.env.VITE_API_BASE_URL,
+    credentials: true,
+  }),
+);
+
+
+// app.use((req, res, next) => {
+//   console.log('Request Origin:', req.headers.origin);
+//   console.log('Allowed Origin:', process.env.VITE_API_BASE_URL);
+//   next();
+// });
+
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       console.log('Origin received by CORS:', origin);
+//       const allowedOrigin = process.env.VITE_API_BASE_URL?.replace(/\/$/, '');
+//       console.log('Allowed origin (trimmed):', allowedOrigin);
+      
+//       if (!origin || origin === allowedOrigin) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error(`CORS not allowed for origin: ${origin}`));
+//       }
+//     },
+//     credentials: true,
+//   }),
+// );
+
 
 app.get('/', (req, res) => {
   res.json({ message: 'Silk Task API is running' })
