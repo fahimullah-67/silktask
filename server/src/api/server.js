@@ -22,10 +22,10 @@ app.use(
       if (!origin) return callback(null, true);
       
       const allowedOrigins = [
-        // process.env.CLIENT_URL,
-        // process.env.VITE_API_BASE_URL,
-        'https://silktask.vercel.app', 
-        'https://silktask.vercel.app', 
+        process.env.CLIENT_URL,
+        process.env.VITE_API_BASE_URL,
+        "https://silktask.vercel.app",
+        "https://silktask.vercel.app",
       ].filter(Boolean);
       
       // For development, allow localhost
